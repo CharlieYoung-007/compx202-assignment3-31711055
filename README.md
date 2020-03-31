@@ -139,7 +139,19 @@ ScoreAction class (provided in Game.java) changes the player's score.
 Describe in two or three paragraphs another way to implement the
 bounded queue which is different from the one you used.
 
-> Write your answer here
+I can use the ArrayList to implement the bounded queue. But I need to consider the size issue as ArrayList has 
+unlimited capacity. So I might need to have capacity and size variables.
+
+As for get() method in BoundedQueue, I can use get method to get the elements in the specified subscript of the queue
+and use the remove method to drop the first element.
+As for count() method in BoundedQueue, I can judge the length of the ArrayList to decide if I need to add the size.
+As for put() method in BoundedQueue, I can use add method to put element to queue according the size of ArrayList.
+As for empty() method in BoundedQueue, I can iterate the ArrayList to judge if it's empty the same way can used 
+in full() method.
+
+
+
+
 
 Submitting
 ----------
