@@ -61,7 +61,43 @@ public class BoundedQueueTest {
         queue.put("Charlie");
         assertEquals(queue.count(),2,"BoundedQueue items should 2 after 2 items are added");
     }
-    
+
+    @Test
+    public void queueWithDropOldest(){
+        BoundedQueue<String> queue = new BoundedQueue<String>(3,true);
+        // Check the count
+        assertEquals(queue.count(),0);
+        // Add three items to the queue
+        queue.put("item1");
+        queue.put("item2");
+        queue.put("item3");
+
+        assertEquals(queue.get(),"item1");
+        assertEquals(queue.count(),2);
+
+        queue.put("item4");
+        assertEquals(queue.get(),"item2");
+        assertEquals(queue.count(),2, "BoundedQueue items should 2 after 1 item is dropped");
+    }
+
+    @Test
+    public void queueWithDropOldestFalse(){
+        BoundedQueue<String> queue = new BoundedQueue<String>(3,false);
+        // Check the count
+        assertEquals(queue.count(),0);
+        // Add three items to the queue
+        queue.put("item1");
+        queue.put("item2");
+        queue.put("item3");
+
+        assertEquals(queue.get(),"item1");
+        assertEquals(queue.count(),2, "BoundedQueue items should 2 after 1 item is dropped");
+
+        queue.put("item4");
+        assertEquals(queue.get(),"item2");
+        assertEquals(queue.count(),2,"BoundedQueue items should 2 after 1 item is dropped");
+    }
+
 
     @AfterEach
     public void reportStats() {

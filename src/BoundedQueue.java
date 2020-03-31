@@ -91,11 +91,12 @@ public class BoundedQueue<T> {
         } else {
             T num = array[0];
             droppedNum++;
+            countN=0;
             for (int i = 0; i < capacity - 1; i++) {
                 array[i] = array[i + 1];
             }
             array[capacity - 1] = null;
-            return array[0];
+            return num;
         }
     }
 
