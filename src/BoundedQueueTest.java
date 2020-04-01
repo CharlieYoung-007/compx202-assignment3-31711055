@@ -20,21 +20,21 @@ public class BoundedQueueTest {
     @Test
     public void newQueueIsNoItems() {
         BoundedQueue<String> queue = new BoundedQueue<String>(3, false);
-        assertEquals(queue.count(),0,"BoundedQueue's items should be 0");
+        assertEquals(queue.count(), 0, "BoundedQueue's items should be 0");
     }
 
     @Test
     public void newQueueHasItems() {
         BoundedQueue<String> queue = new BoundedQueue<String>(3, false);
         queue.put("Charlie");
-        assertEquals(queue.count(),1,"BoundedQueue's items should not be 0 after an item is added");
+        assertEquals(queue.count(), 1, "BoundedQueue's items should not be 0 after an item is added");
     }
 
     @Test
     public void newQueueNotFull() {
         BoundedQueue<String> queue = new BoundedQueue<String>(3, false);
         queue.put("Charlie");
-        assertFalse(queue.full(),"BoundedQueue return should not be true because the queue has not reached its capacity");
+        assertFalse(queue.full(), "BoundedQueue return should not be true because the queue has not reached its capacity");
     }
 
     @Test
@@ -44,14 +44,14 @@ public class BoundedQueueTest {
         queue.put("Bob");
         queue.put("Alice");
         queue.put("Duke");
-        assertTrue(queue.full(),"BoundedQueue return should be true because the queue has reached its capacity");
+        assertTrue(queue.full(), "BoundedQueue return should be true because the queue has reached its capacity");
     }
 
     @Test
     public void newQueuePutOne() {
         BoundedQueue<String> queue = new BoundedQueue<String>(3, false);
         queue.put("Charlie");
-        assertEquals(queue.count(),1,"BoundedQueue items should 1 after 1 item is added");
+        assertEquals(queue.count(), 1, "BoundedQueue items should 1 after 1 item is added");
     }
 
     @Test
@@ -59,43 +59,41 @@ public class BoundedQueueTest {
         BoundedQueue<String> queue = new BoundedQueue<String>(3, false);
         queue.put("Charlie");
         queue.put("Charlie");
-        assertEquals(queue.count(),2,"BoundedQueue items should 2 after 2 items are added");
+        assertEquals(queue.count(), 2, "BoundedQueue items should 2 after 2 items are added");
     }
 
     @Test
-    public void queueWithDropOldest(){
-        BoundedQueue<String> queue = new BoundedQueue<String>(3,true);
+    public void queueWithDropOldest() {
+        BoundedQueue<String> queue = new BoundedQueue<String>(3, true);
         // Check the count
-        assertEquals(queue.count(),0);
+        assertEquals(queue.count(), 0);
         // Add three items to the queue
         queue.put("item1");
         queue.put("item2");
         queue.put("item3");
 
-        assertEquals(queue.get(),"item1");
-        assertEquals(queue.count(),2);
+        assertEquals("item1", queue.get());
+        assertEquals(2, queue.count());
 
         queue.put("item4");
-        assertEquals(queue.get(),"item2");
-        assertEquals(queue.count(),2, "BoundedQueue items should 2 after 1 item is dropped");
+        assertEquals(queue.get(), "item2");
+        assertEquals(queue.count(), 2, "BoundedQueue items should 2 after 1 item is dropped");
     }
 
     @Test
-    public void queueWithDropOldestFalse(){
-        BoundedQueue<String> queue = new BoundedQueue<String>(3,false);
+    public void queueWithDropOldestFalse() {
+        BoundedQueue<String> queue = new BoundedQueue<String>(3, false);
         // Check the count
-        assertEquals(queue.count(),0);
+        assertEquals(queue.count(), 0);
         // Add three items to the queue
         queue.put("item1");
         queue.put("item2");
         queue.put("item3");
-
-        assertEquals(queue.get(),"item1");
-        assertEquals(queue.count(),2, "BoundedQueue items should 2 after 1 item is dropped");
+        assertEquals(3, queue.count(), "BoundedQueue items should 3");
 
         queue.put("item4");
-        assertEquals(queue.get(),"item2");
-        assertEquals(queue.count(),2,"BoundedQueue items should 2 after 1 item is dropped");
+        assertEquals(queue.count(), 3, "BoundedQueue items should 3 because the new item is dropped");
+        assertEquals("item1", queue.get(), "BoundedQueue's first item should be item1 because the new item is dropped");
     }
 
 

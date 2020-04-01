@@ -75,7 +75,13 @@ public class BoundedQueue<T> {
                 break;
             }
             if (full()) {
-                get();
+                if (this.dropOldest) {
+                    get();
+                } else {
+                    countN = 0;
+                    array[capacity-1] =item;
+                }
+
             }
         }
     }
@@ -91,7 +97,7 @@ public class BoundedQueue<T> {
         } else {
             T num = array[0];
             droppedNum++;
-            countN=0;
+            countN = 0;
             for (int i = 0; i < capacity - 1; i++) {
                 array[i] = array[i + 1];
             }
@@ -112,7 +118,7 @@ public class BoundedQueue<T> {
         return array;
     }
 
-    static void reportStats(){
+    static void reportStats() {
         System.out.println("number of BoundedQueue instances: " + BQNum);
         System.out.println("number of dropped items: " + droppedNum);
     }
