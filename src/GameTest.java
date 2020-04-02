@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class GameTest {
     BoundedQueue<Action> queue1 = new BoundedQueue<Action>(3, false);
+    BoundedQueue<MoveAction> queue2 = new BoundedQueue<MoveAction>(3, false);
     Game game = new Game();
 
     @Test
@@ -53,10 +54,10 @@ public class GameTest {
 
     @Test
     public void gameTest2() {
-        game.generateMovements(queue1);
-        assertEquals(2, queue1.count(), "there should be 2 items in queue1");
-        game.process(queue1);
-        assertEquals(0, queue1.count(), "there should be 0 item in queue1");
+        game.generateMovements(queue2);
+        assertEquals(2, queue2.count(), "there should be 2 items in queue1");
+        game.process(queue2);
+        assertEquals(0, queue2.count(), "there should be 0 item in queue1");
     }
 
 
